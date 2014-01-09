@@ -4,16 +4,26 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Index extends CI_Controller {
 
-    function __construct() {
+    public function __construct() {
 
         parent::__construct();
-    }
+        $this->load->library('grocery_CRUD');
 
-    function index() {
 
-    	$this->load>view('index');
-        
     }
+   
+
+    public function home(){
+	
+		$output = (object)array('output' => '' , 'js_files' => array() , 'css_files' => array());
+		$this->template->load('index',$output);
+	}
+
+	public function lista(){
+
+		$this->template->load('index','template/home');	
+
+	}
 }
         
 
