@@ -40,7 +40,13 @@ echo $contents;
 			   url: "http://<?=$server;?>/processos/home/getLastId/",
 			   data: "",
 			   success: function(data){
-			     console.log( "Data Saved: " + data );
+			      if(data === "" || data === null){
+
+			      	console.log("Vazio");
+			      }else{
+
+			      	console.log(data);
+			      }
 			   }
 			 });
 

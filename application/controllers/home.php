@@ -61,13 +61,8 @@ class Home extends CI_Controller {
 			 $this->db->select('id');
 			 $this->db->limit(1); 	
 			 $lastId = $this->db->get('processo')->result();
-				if($lastId[0]->id === NULL){
-
-					echo 1;
-				
-				}else{
-
-					
+				foreach ($lastId as $key => $value) {
+					echo $value->id;
 				}
 			
 			}catch(Exception $e){
