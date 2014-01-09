@@ -1,1 +1,6 @@
-home
+<?php 
+
+
+echo $output;
+
+ ?>

@@ -7,6 +7,9 @@ class Index extends CI_Controller {
     public function __construct() {
 
         parent::__construct();
+        /*********************************/
+        /*CHAMA LIBRARY CRUD*/
+
         $this->load->library('grocery_CRUD');
 
 
@@ -19,11 +22,7 @@ class Index extends CI_Controller {
 		$this->template->load('index',$output);
 	}
 
-	public function lista(){
-
-		$this->template->load('index','template/home');	
-
-	}
+	
 }
         
 
