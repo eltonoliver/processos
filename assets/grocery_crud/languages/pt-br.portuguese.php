@@ -61,10 +61,10 @@
 	$lang['form_update_and_go_back']= 'Aplicar alterações e voltar para a listagem';
 
 	/* Upload functionality */
-	$lang['string_delete_file'] 	= "Deleting file";
-	$lang['string_progress'] 		= "Progress: ";
-	$lang['error_on_uploading'] 	= "An error has occurred on uploading.";
-	$lang['message_prompt_delete_file'] 	= "Are you sure that you want to delete this file?";
+	$lang['string_delete_file'] 	= "Deletando Arquivo";
+	$lang['string_progress'] 		= "Progresso:: ";
+	$lang['error_on_uploading'] 	= "Ocorreu no upload.";
+	$lang['message_prompt_delete_file'] 	= "Você tem certeza que deseja deletar este aquivo?";
 	
 	$lang['error_max_number_of_files'] 	= "You can only upload one file each time.";
 	$lang['error_accept_file_types'] 	= "You are not allow to upload this kind of extension.";
@@ -72,8 +72,8 @@
 	$lang['error_min_file_size'] 		= "You cannot upload an empty file.";
 
 	/* Added in version 1.3.1 */
-	$lang['list_export'] 	= "Export";
-	$lang['list_print'] 	= "Print";
+	$lang['list_export'] 	= "Exportar";
+	$lang['list_print'] 	= "Imprimir";
 	$lang['minimize_maximize'] = 'Minimize/Maximize';
 
 	/* Added in version 1.4 */

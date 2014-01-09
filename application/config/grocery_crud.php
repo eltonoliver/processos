@@ -1,9 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 	//For view all the languages go to the folder assets/grocery_crud/languages/
-	$config['grocery_crud_default_language']	= 'english';
+	$config['grocery_crud_default_language']	= 'pt-br.portuguese';
 
 	// There are only three choices: "uk-date" (dd/mm/yyyy), "us-date" (mm/dd/yyyy) or "sql-date" (yyyy-mm-dd)
-	$config['grocery_crud_date_format']			= 'pt-br.portuguese';
+	$config['grocery_crud_date_format']			= 'uk-date';
 
 	// The default per page when a user firstly see a list page
 	$config['grocery_crud_default_per_page']	= 25;
@@ -14,7 +14,7 @@
 	//You can choose 'ckeditor','tinymce' or 'markitup'
 	$config['grocery_crud_default_text_editor'] = 'ckeditor';
 	//You can choose 'minimal' or 'full'
-	$config['grocery_crud_text_editor_type'] 	= 'full';
+	$config['grocery_crud_text_editor_type'] 	= 'minimal';
 
 	//The character limiter at the list page, zero(0) value if you don't want character limiter at your list page
 	$config['grocery_crud_character_limiter'] 	= 30;
