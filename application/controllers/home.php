@@ -33,7 +33,7 @@ class Home extends CI_Controller {
 			$crud->columns('descricao','data','numeroEdital','objetivo','modalidade_id');
 			$crud->set_relation('modalidade_id','modalidade','descricao');
 			$crud->display_as('descricao','Descrição')->display_as('data','Data')
-				 ->display_as('numeroEdital','Número do Edital')->display_as('objetivo','Objetivo')
+				 ->display_as('numeroEdital','Edital')->display_as('objetivo','Objetivo')
 				 ->display_as('modalidade_id','Modalidade');
 				 
 		 	$crud->required_fields('descricao','data','numeroEdital','objetivo','idUsuario');
@@ -233,6 +233,15 @@ class Home extends CI_Controller {
 					echo "Error : ".$e->getMessage();
 
 			}
+	}
+
+
+	public function arquivosDownload(){
+
+
+			
+
+
 	}
 }
         
