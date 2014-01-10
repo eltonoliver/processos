@@ -294,7 +294,7 @@ class Home extends CI_Controller {
 			foreach ($query as  $value) {
 				$laco = '
 					<p><strong>Modalidade :'.$value->.'</strong></p>
-					<p><strong>Data de Abertura :</strong></p>
+					<p><strong>Data de Abertura :'..'</strong></p>
 					<p><strong>Nº. Processo:</strong></p>
 					<p><strong>Objetivo :</strong></p><br>
 					<p><strong>Arquivos :</strong></p>
