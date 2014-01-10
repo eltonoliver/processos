@@ -75,7 +75,7 @@ class Home extends CI_Controller {
 			$crud->columns('edital','processo_id');
 			$crud->add_fields('edital','processo_id');
 			$crud->display_as('edital','Editais')->display_as('processo_id','Nº Processo');
-			$crud->set_field_upload('edital','assets/arquivos/edital');
+			$crud->set_field_upload('edital','assets/arquivos');
 
 			
 			 $state = $crud->getState();
@@ -114,7 +114,7 @@ class Home extends CI_Controller {
 			$crud->columns('anexo','processo_id');
 			$crud->add_fields('anexo','processo_id');
 			$crud->display_as('enexo','Anexos')->display_as('processo_id','Nº Processo');
-			$crud->set_field_upload('anexo','assets/arquivos/anexo');
+			$crud->set_field_upload('anexo','assets/arquivos');
 
 			
 			 $state = $crud->getState();
@@ -152,7 +152,7 @@ class Home extends CI_Controller {
 			$crud->columns('resultado','processo_id');
 			$crud->add_fields('resultado','processo_id');
 			$crud->display_as('resultado','Resultados')->display_as('processo_id','Nº Processo');
-			$crud->set_field_upload('resultado','assets/arquivos/resultado');
+			$crud->set_field_upload('resultado','assets/arquivos');
 
 			
 			 $state = $crud->getState();
@@ -189,7 +189,7 @@ class Home extends CI_Controller {
 			$crud->columns('adendos','processo_id');
 			$crud->add_fields('adendos','processo_id');
 			$crud->display_as('adendos','Adendos')->display_as('processo_id','Nº Processo');
-			$crud->set_field_upload('adendos','assets/arquivos/adendo');
+			$crud->set_field_upload('adendos','assets/arquivos');
 
 			
 			 $state = $crud->getState();
@@ -293,11 +293,11 @@ class Home extends CI_Controller {
 
 			foreach ($query as  $value) {
 				$laco = '
-					<p><strong>Modalidade :'.$value->.'</strong></p>
-					<p><strong>Data de Abertura :'..'</strong></p>
-					<p><strong>Nº. Processo:</strong></p>
-					<p><strong>Objetivo :</strong></p><br>
-					<p><strong>Arquivos :</strong></p>
+					<p><strong>Modalidade :</strong>'.$value->modalidadeDescricao.'</p>
+					<p><strong>Data de Abertura :</strong>'.$value->data.'</p>
+					<p><strong>Nº. Processo:</strong>'.$value->processoDescricao.' </p>
+					<p><strong>Objetivo :</strong>'.$value->objetivo.' </p> <br>
+					<p><strong>Arquivos :</strong> </p>
 					
 				';
 			}
