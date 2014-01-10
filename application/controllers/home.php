@@ -46,7 +46,7 @@ class Home extends CI_Controller {
 
 		 	/*ACTIONS**/
 		 	$crud->add_action('Editais', '', 'home/edital','ui-icon-plus');
-		 	$crud->add_action('Anexos', '', 'demo/action_more','ui-icon-plus');
+		 	$crud->add_action('Anexos', '', 'home/anexos','ui-icon-plus');
 		 	$crud->add_action('Resultados', '', 'demo/action_more','ui-icon-plus');
 		 	$crud->add_action('Adendos', '', 'demo/action_more','ui-icon-plus');
 		 	/*END ACTIONS**/ 
@@ -108,7 +108,7 @@ class Home extends CI_Controller {
 
 			$crud = new grocery_CRUD();
 			$crud->set_subject('Anexos');
-			$crud->set_crud_url_path(site_url('home/edital'));			
+			$crud->set_crud_url_path(site_url('home/anexos'));			
 			$crud->set_theme('datatables');
 			$crud->set_table('anexos');
 			$crud->columns('anexo','processo_id');
@@ -129,7 +129,7 @@ class Home extends CI_Controller {
 
 
 			$output = $crud->render();
-			$this->template->load('index','templates/edital',$output);	
+			$this->template->load('index','templates/anexo',$output);	
 
 		}catch(Exception $e){
 
@@ -142,7 +142,40 @@ class Home extends CI_Controller {
 	}
 
 	public function resultados( $id = null ){
-		# code...
+		try{
+
+			$crud = new grocery_CRUD();
+			$crud->set_subject('Resultados');
+			$crud->set_crud_url_path(site_url('home/resultado'));			
+			$crud->set_theme('datatables');
+			$crud->set_table('resultados');
+			$crud->columns('anexo','processo_id');
+			$crud->add_fields('anexo','processo_id');
+			$crud->display_as('enexo','Anexo')->display_as('processo_id','Nº Processo');
+			$crud->set_field_upload('anexo','assets/arquivos/anexo');
+
+			
+			 $state = $crud->getState();
+   			 $state_info = $crud->getStateInfo();
+			
+   			 if($state == 'list'){
+       		 	 $idProcesso = $this->uri->segment(3);
+       			 $this->session->set_userdata('idProcesso',  $idProcesso);
+			 }	
+   			
+			$crud->field_type('processo_id', 'hidden', $this->session->userdata('idProcesso'));
+
+
+			$output = $crud->render();
+			$this->template->load('index','templates/anexo',$output);	
+
+		}catch(Exception $e){
+
+			show_error("Erro :".$e->getMessage()." -  ".$e->getTraceAsString);
+
+
+		}
+
 	}
 
 	public function adendos( $id = null){
