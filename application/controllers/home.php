@@ -298,7 +298,10 @@ class Home extends CI_Controller {
 					<p><strong>Nº. Processo:</strong>'.$value->processoDescricao.' </p>
 					<p><strong>Objetivo :</strong>'.$value->objetivo.' </p> <br>
 					<p><strong>Arquivos :</strong> </p>
-					
+					'.$value->edital.' <br>
+					'.$value->anexo.'<br>
+					'.$value->adendos.'<br>
+					'.$value->resultado.'
 				';
 			}
 				
