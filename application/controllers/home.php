@@ -24,11 +24,10 @@ class Home extends CI_Controller {
 	public function lista( $id = null ){
 		try{
 
-
 			$crud = new grocery_CRUD();
 
 			$crud->set_crud_url_path(site_url('home/lista'));			
-			$crud->set_theme('flexigrid');
+			$crud->set_theme('datatables');
 			$crud->set_table('processo');
 			$crud->add_fields('descricao','data','numeroEdital','objetivo','modalidade_id');
 			$crud->columns('descricao','data','numeroEdital','objetivo','modalidade_id');
@@ -36,9 +35,21 @@ class Home extends CI_Controller {
 			$crud->display_as('descricao','Descrição')->display_as('data','Data')
 				 ->display_as('numeroEdital','Número do Edital')->display_as('objetivo','Objetivo')
 				 ->display_as('modalidade_id','Modalidade');
-
+				 
 		 	$crud->required_fields('descricao','data','numeroEdital','objetivo','idUsuario');
 		 	$crud->set_subject('Processos Senac');
+		 	$crud->fields('descricao','data','numeroEdital','objetivo','modalidade_id','status');
+		 	 
+
+		 	 $crud->field_type('status','dropdown',
+          		  array('1' => 'Ativo', '2' => 'Inativo'));
+
+		 	/*ACTIONS**/
+		 	$crud->add_action('Editais', '', 'demo/action_more','ui-icon-plus');
+		 	$crud->add_action('Anexos', '', 'demo/action_more','ui-icon-plus');
+		 	$crud->add_action('Resultados', '', 'demo/action_more','ui-icon-plus');
+		 	$crud->add_action('Adendos', '', 'demo/action_more','ui-icon-plus');
+		 	/*END ACTIONS**/ 
 			$output = $crud->render();
 
 			$this->template->load('index','templates/home',$output);	
@@ -47,11 +58,31 @@ class Home extends CI_Controller {
 
 			show_error("Erro :".$e->getMessage()." -  ".$e->getTraceAsString);
 
-
 		}
 		
 
 	}
+
+	public function edital( $id = null ){
+
+
+
+	}
+
+	public function anexos( $id = null ){
+		# code...
+	
+	}
+
+	public function resultados( $id = null ){
+		# code...
+	}
+
+	public function adendos( $id = null){
+		# code...
+	}
+
+
 
 	/*RECUPERAR O ULTIMO ID*/
 	public function getLastId(){

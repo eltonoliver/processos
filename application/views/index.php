@@ -23,6 +23,7 @@
 
 echo $contents;
 
+
 ?>
 
 </body>
@@ -35,6 +36,8 @@ echo $contents;
 		<?php $server = $_SERVER['SERVER_NAME']; ?>
 		$("#field-numeroEdital").focus(function(){
 			
+			var dataCad = <?=date('Y'); ?>
+
 			$.ajax({
 			   type: "POST",
 			   url: "http://<?=$server;?>/processos/home/getLastId/",
@@ -42,10 +45,11 @@ echo $contents;
 			   success: function(data){
 			      if(data === "" || data === null){
 
-			      	console.log("Vazio");
+			      	var incremento = 1;
+			        $("#field-numeroEdital").val(incremento+"/"+dataCad)
 			      }else{
 
-			      	console.log(data);
+			       $("#field-numeroEdital").val(data+"/"+dataCad)
 			      }
 			   }
 			 });
