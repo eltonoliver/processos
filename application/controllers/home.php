@@ -261,11 +261,7 @@ class Home extends CI_Controller {
 							INNER JOIN anexos ON processo.id = anexos.processo_id
 							INNER JOIN adendos ON processo.id = adendos.processo_id ,
 							edital
-
-
-
-
-					'
+			'
 
 
 				)->result();
