@@ -239,9 +239,81 @@ class Home extends CI_Controller {
 	public function arquivosDownload(){
 
 
-			
+			$query = $this->db->query(
+
+					'
+
+							SELECT
+							processo.numeroEdital,
+							processo.descricao as processoDescricao,
+							processo.`data`,
+							processo.objetivo,
+							resultados.resultado,
+							modalidade.descricao as modalidadeDescricao,
+							anexos.anexo,
+							adendos.adendos,
+							edital.processo_id,
+							edital.edital
+							FROM
+							processo
+							INNER JOIN resultados ON processo.id = resultados.processo_id
+							INNER JOIN modalidade ON processo.modalidade_id = modalidade.id
+							INNER JOIN anexos ON processo.id = anexos.processo_id
+							INNER JOIN adendos ON processo.id = adendos.processo_id ,
+							edital
 
 
+
+
+					'
+
+
+				)->result();
+
+
+
+
+
+			$body = '
+
+			<!DOCTYPE html>
+			<html lang="en">
+			<head>
+			   <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+			   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+			   <meta name="description" content="">
+			   <meta name="keywords" content="">
+			   <meta name="author" content="">
+				<title> Download Arquivos </title>
+				
+				<style type="text/css"> body{ font-family: Arial; } </style>
+			</head>
+			<body>
+			';
+
+			foreach ($query as  $value) {
+				$laco = '
+					<p><strong>Modalidade :'.$value->.'</strong></p>
+					<p><strong>Data de Abertura :</strong></p>
+					<p><strong>Nº. Processo:</strong></p>
+					<p><strong>Objetivo :</strong></p><br>
+					<p><strong>Arquivos :</strong></p>
+					
+				';
+			}
+				
+
+
+
+		 $fimBody = '	
+			</body>
+			</html>
+
+
+
+			';
+
+				echo $body.$laco.$fimBody;
 	}
 }
         
