@@ -242,25 +242,13 @@ class Home extends CI_Controller {
 			$query = $this->db->query(
 
 					'
-
-							SELECT
-							processo.numeroEdital,
-							processo.descricao as processoDescricao,
-							processo.`data`,
-							processo.objetivo,
-							resultados.resultado,
-							modalidade.descricao as modalidadeDescricao,
-							anexos.anexo,
-							adendos.adendos,
-							edital.processo_id,
-							edital.edital
-							FROM
-							processo
-							INNER JOIN resultados ON processo.id = resultados.processo_id
-							INNER JOIN modalidade ON processo.modalidade_id = modalidade.id
-							INNER JOIN anexos ON processo.id = anexos.processo_id
-							INNER JOIN adendos ON processo.id = adendos.processo_id ,
-							edital
+				    SELECT modalidade.descricao as modalidade, 
+					processo.descricao, 
+					processo.id, 
+					processo.data, 
+					processo.numeroEdital, 
+					processo.objetivo
+				    FROM processo INNER JOIN modalidade ON processo.modalidade_id = modalidade.id WHERE processo.status = 1					
 			'
 
 
@@ -289,19 +277,95 @@ class Home extends CI_Controller {
 
 			foreach ($query as  $value) {
 				$laco = '
-					<p><strong>Modalidade :</strong>'.$value->modalidadeDescricao.'</p>
+					<p><strong>Modalidade :</strong>'.$value->modalidade.'</p>
 					<p><strong>Data de Abertura :</strong>'.$value->data.'</p>
-					<p><strong>Nº. Processo:</strong>'.$value->processoDescricao.' </p>
-					<p><strong>Objetivo :</strong>'.$value->objetivo.' </p> <br>
+					<p><strong>Nº. Processo:</strong>'.$value->descricao.' </p>
+					<p><strong>Objetivo :</strong>'.$value->objetivo.' </p>
 					<p><strong>Arquivos :</strong> </p>
-					'.$value->edital.' <br>
-					'.$value->anexo.'<br>
-					'.$value->adendos.'<br>
-					'.$value->resultado.'
+				
 				';
+		echo $body.$laco;
+				//GET EDITAL
+				$this->db->where('processo_id', $value->id);
+				$queryEdital = $this->db->get('edital')->result();
+				foreach ($queryEdital as $edital) {
+					
+					$editais[] = $edital->edital;
+				}
+
+
+				//GET ANEXOS
+
+				$this->db->where('processo_id', $value->id);
+				$queryAnexos = $this->db->get('anexos')->result();
+				foreach ($queryAnexos as $anexo) {
+					
+					$anexos[] = $anexo->anexo;
+				}
+
+				//GET ADENDOS
+
+				$this->db->where('processo_id', $value->id);
+				$queryAdendo = $this->db->get('adendos')->result();
+				foreach ($queryAdendo as $adendo) {
+					
+					$adendos[] = $adendo->adendos;
+				}
+				//GET RESULTADOS
+				$this->db->where('processo_id', $value->id);
+				$queryResultado = $this->db->get('resultados')->result();
+				foreach ($queryResultado as $resultado) {
+					
+					$resultados[] = $resultado->resultado;
+				}
+
 			}
 				
 
+			//listar os editais
+			$qtdEdital = count($editais);
+			echo ($qtdEdital > 0 ) ? 'Editais:<br>' : '';
+			for ($i=0; $i <= $qtdEdital ; $i++) { 
+
+				if(isset($editais[$i])){
+			 	echo '<a href="'.base_url().'assets/arquivos/'.$editais[$i].' ">' .$editais[$i]. ' </a><br>';
+			 }
+			}
+
+			//listar anexos
+
+			$qtdAnexos = count($anexos);
+			echo ($qtdAnexos >0 )?'Anexos:<br>':'';
+			for ($i=0; $i <= $qtdAnexos ; $i++) { 
+
+				if(isset($anexos[$i])){
+			 	echo '<a href="'.base_url().'assets/arquivos/'.$anexos[$i].' ">' .$anexos[$i]. ' </a><br>';
+			 }
+			}
+
+			//listar adendos 
+
+			$qtdAdendos = count($adendos);
+			echo ($qtdAdendos > 0) ? 'Adendos:<br>' : '';
+			for ($i=0; $i <= $qtdAdendos ; $i++) { 
+
+				if(isset($adendos[$i])){
+			 	echo '<a href="'.base_url().'assets/arquivos/'.$adendos[$i].' ">' .$adendos[$i]. ' </a><br>';
+			 }
+			}
+
+			//lista resultados
+
+			$qtdResultados = count($resultados);
+			echo ($qtdResultados > 0 ) ? 'Resultados:<br>': '';
+
+			for ($i=0; $i <= $qtdResultados ; $i++) { 
+
+				if(isset($resultados[$i])){
+			 	echo '<a href="'.base_url().'assets/arquivos/'.$resultados[$i].' ">' .$resultados[$i]. ' </a><br>';
+			 }
+			}
+			
 
 
 		 $fimBody = '	
@@ -312,7 +376,7 @@ class Home extends CI_Controller {
 
 			';
 
-				echo $body.$laco.$fimBody;
+				
 	}
 }
         

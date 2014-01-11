@@ -1,0 +1,16 @@
+================================
+=1.: Usuário deve finalizar o atendimento =
+=1 chamado por categoria                     =
+=remover botão quando o usuário finalizar= 
+=usuário				    =
+=				    =	
+===============================
+ASSINATURA ELETRÔNICA
+
+
+http://wiki.locaweb.com.br/pt-br/Alterando_a_permiss%C3%A3o_de_pastas_em_Windows
+
+/**/
+
+
+http://www.slideshare.net/purulofor/apostila-lgica-de-programao-senac
