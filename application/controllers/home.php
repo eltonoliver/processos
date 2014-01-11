@@ -68,6 +68,7 @@ class Home extends CI_Controller {
 		try{
 
 			$crud = new grocery_CRUD();
+			$crud->where('processo_id',$id);
 			$crud->set_subject('Edital');
 			$crud->set_crud_url_path(site_url('home/edital'));			
 			$crud->set_theme('datatables');
@@ -107,6 +108,7 @@ class Home extends CI_Controller {
 		try{
 
 			$crud = new grocery_CRUD();
+			$crud->where('processo_id',$id);
 			$crud->set_subject('Anexos');
 			$crud->set_crud_url_path(site_url('home/anexos'));			
 			$crud->set_theme('datatables');
@@ -145,6 +147,7 @@ class Home extends CI_Controller {
 		try{
 
 			$crud = new grocery_CRUD();
+			$crud->where('processo_id',$id);
 			$crud->set_subject('Resultados');
 			$crud->set_crud_url_path(site_url('home/resultados'));			
 			$crud->set_theme('datatables');
@@ -182,6 +185,7 @@ class Home extends CI_Controller {
 		try{
 
 			$crud = new grocery_CRUD();
+			$crud->where('processo_id',$id);
 			$crud->set_subject('Adendos');
 			$crud->set_crud_url_path(site_url('home/adendos'));			
 			$crud->set_theme('datatables');
@@ -277,6 +281,7 @@ class Home extends CI_Controller {
 
 			foreach ($query as  $value) {
 				$laco = '
+				    <br><hr>
 					<p><strong>Modalidade :</strong>'.$value->modalidade.'</p>
 					<p><strong>Data de Abertura :</strong>'.$value->data.'</p>
 					<p><strong>Nº. Processo:</strong>'.$value->descricao.' </p>
@@ -323,50 +328,50 @@ class Home extends CI_Controller {
 				
 
 			//listar os editais
-			$qtdEdital = count($editais);
-			echo ($qtdEdital > 0 ) ? 'Editais:<br>' : '';
+			$qtdEdital = (isset($editais)) ? count($editais) : '';
+			echo ($qtdEdital > 0 ) ? '<strong>Editais:</strong><br>' : '';
 			for ($i=0; $i <= $qtdEdital ; $i++) { 
 
 				if(isset($editais[$i])){
-			 	echo '<a href="'.base_url().'assets/arquivos/'.$editais[$i].' ">' .$editais[$i]. ' </a><br>';
+			 	echo $editais[$i].nbs(3).'<a href="'.base_url().'assets/arquivos/'.$editais[$i].' "><img src="'.base_url().'assets/download.png" ></a><br>';
 			 }
 			}
 
 			//listar anexos
 
-			$qtdAnexos = count($anexos);
-			echo ($qtdAnexos >0 )?'Anexos:<br>':'';
+			$qtdAnexos = (isset($anexos)) ? count($anexos) : '';
+			echo ($qtdAnexos >0 )?'<br><strong>Anexos:</strong><br>':'';
 			for ($i=0; $i <= $qtdAnexos ; $i++) { 
 
 				if(isset($anexos[$i])){
-			 	echo '<a href="'.base_url().'assets/arquivos/'.$anexos[$i].' ">' .$anexos[$i]. ' </a><br>';
+			 	echo $anexos[$i].nbs(3).'<a href="'.base_url().'assets/arquivos/'.$anexos[$i].' "><img src="'.base_url().'assets/download.png" ></a><br>';
 			 }
 			}
 
 			//listar adendos 
 
-			$qtdAdendos = count($adendos);
-			echo ($qtdAdendos > 0) ? 'Adendos:<br>' : '';
+			$qtdAdendos = (isset($adendos)) ? count($adendos) : '';
+			echo ($qtdAdendos > 0) ? '<br><strong>Adendos:</strong><br>' : '';
 			for ($i=0; $i <= $qtdAdendos ; $i++) { 
 
 				if(isset($adendos[$i])){
-			 	echo '<a href="'.base_url().'assets/arquivos/'.$adendos[$i].' ">' .$adendos[$i]. ' </a><br>';
+			 	echo $adendos[$i].nbs(3).'<a href="'.base_url().'assets/arquivos/'.$adendos[$i].' "><img src="'.base_url().'assets/download.png" ></a><br>';
 			 }
 			}
 
 			//lista resultados
 
-			$qtdResultados = count($resultados);
-			echo ($qtdResultados > 0 ) ? 'Resultados:<br>': '';
+			$qtdResultados = (isset($resultados))  ? count($resultados) : '';
+			echo ($qtdResultados > 0 ) ? '<br><strong>Resultados:</strong><br>': '';
 
 			for ($i=0; $i <= $qtdResultados ; $i++) { 
 
 				if(isset($resultados[$i])){
-			 	echo '<a href="'.base_url().'assets/arquivos/'.$resultados[$i].' ">' .$resultados[$i]. ' </a><br>';
+			 	echo $resultados[$i].nbs(3).'<a href="'.base_url().'assets/arquivos/'.$resultados[$i].' "><img src="'.base_url().'assets/download.png" ></a><br>';
 			 }
 			}
 			
-
+			echo '<hr>';
 
 		 $fimBody = '	
 			</body>
