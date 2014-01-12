@@ -246,7 +246,8 @@ class Home extends CI_Controller {
 			$query = $this->db->query(
 
 					'
-				    SELECT modalidade.descricao as modalidade, 
+				    SELECT 
+				    modalidade.descricao as modalidade, 
 					processo.descricao, 
 					processo.id, 
 					processo.data, 
@@ -280,102 +281,102 @@ class Home extends CI_Controller {
 			';
 		echo $body;	
 			foreach ($query as  $value) {
-				$laco = '
-				    <br><hr>
-					<p><strong>Modalidade :</strong>'.$value->modalidade.'</p>
-					<p><strong>Data de Abertura :</strong>'.formatDataBrasil($value->data).'</p>
-					<p><strong>Nº. Processo:</strong>'.$value->numeroEdital.' </p>
-					<p><strong>Objetivo :</strong>'.$value->objetivo.' </p>
-					<p><strong>Arquivos :</strong> </p>
-				
-				';
-		echo $laco;
-				//GET EDITAL
-				$this->db->where('processo_id', $value->id);
-				$queryEdital = $this->db->get('edital')->result();
-				foreach ($queryEdital as $edital) {
-					
-					$editais[] = $edital->edital;
-				}
+						$laco .= '
+						    <br><hr>
+							<p><strong>Modalidade :</strong>'.$value->modalidade.'</p>
+							<p><strong>Data de Abertura :</strong>'.formatDataBrasil($value->data).'</p>
+							<p><strong>Nº. Processo:</strong>'.$value->numeroEdital.' </p>
+							<p><strong>Objetivo :</strong>'.$value->objetivo.' </p>
+							<p><strong>Arquivos :</strong> </p>
+						
+									';
+							//echo $laco;
+							//GET EDITAL
+							$this->db->where('processo_id', $value->id);
+							$queryEdital = $this->db->get('edital')->result();
+							foreach ($queryEdital as $edital) {
+								
+								$editais[] = $edital->edital;
+							}
 
 
-				//GET ANEXOS
+							//GET ANEXOS
 
-				$this->db->where('processo_id', $value->id);
-				$queryAnexos = $this->db->get('anexos')->result();
-				foreach ($queryAnexos as $anexo) {
-					
-					$anexos[] = $anexo->anexo;
-				}
+							$this->db->where('processo_id', $value->id);
+							$queryAnexos = $this->db->get('anexos')->result();
+							foreach ($queryAnexos as $anexo) {
+								
+								$anexos[] = $anexo->anexo;
+							}
 
-				//GET ADENDOS
+							//GET ADENDOS
 
-				$this->db->where('processo_id', $value->id);
-				$queryAdendo = $this->db->get('adendos')->result();
-				foreach ($queryAdendo as $adendo) {
-					
-					$adendos[] = $adendo->adendos;
-				}
-				//GET RESULTADOS
-				$this->db->where('processo_id', $value->id);
-				$queryResultado = $this->db->get('resultados')->result();
-				foreach ($queryResultado as $resultado) {
-					
-					$resultados[] = $resultado->resultado;
-				}
+							$this->db->where('processo_id', $value->id);
+							$queryAdendo = $this->db->get('adendos')->result();
+							foreach ($queryAdendo as $adendo) {
+								
+								$adendos[] = $adendo->adendos;
+							}
+							//GET RESULTADOS
+							$this->db->where('processo_id', $value->id);
+							$queryResultado = $this->db->get('resultados')->result();
+							foreach ($queryResultado as $resultado) {
+								
+								$resultados[] = $resultado->resultado;
+							}
 
-				//listar os editais
-			$qtdEdital = (isset($editais)) ? count($editais) : '';
-			echo ($qtdEdital > 0 ) ? '<strong>Editais:</strong><br>' : '';
-			for ($i=0; $i <= $qtdEdital ; $i++) { 
+							//listar os editais
+						$qtdEdital = (isset($editais)) ? count($editais) : '';
+						echo ($qtdEdital > 0 ) ? '<strong>Editais:</strong><br>' : '';
+						for ($i=0; $i <= $qtdEdital ; $i++) { 
 
-				if(isset($editais[$i])){
-			 	echo '<a href="'.base_url().'assets/arquivos/'.$editais[$i].' "><img src="'.base_url().'assets/download.png" ></a>'.nbs(3).$editais[$i].'<br>';
-			 }
-			}
+							if(isset($editais[$i])){
+						 	echo '<a href="'.base_url().'assets/arquivos/'.$editais[$i].' "><img src="'.base_url().'assets/download.png" ></a>'.nbs(3).$editais[$i].'<br>';
+						 }
+						}
 
-			//listar anexos
+						//listar anexos
 
-			$qtdAnexos = (isset($anexos)) ? count($anexos) : '';
-			echo ($qtdAnexos >0 )?'<br><strong>Anexos:</strong><br>':'';
-			for ($i=0; $i <= $qtdAnexos ; $i++) { 
+						$qtdAnexos = (isset($anexos)) ? count($anexos) : '';
+						echo ($qtdAnexos >0 )?'<br><strong>Anexos:</strong><br>':'';
+						for ($i=0; $i <= $qtdAnexos ; $i++) { 
 
-				if(isset($anexos[$i])){
-			 	echo '<a href="'.base_url().'assets/arquivos/'.$anexos[$i].' "><img src="'.base_url().'assets/download.png" ></a>'.nbs(3).$anexos[$i].'<br>';
-			 }
-			}
+							if(isset($anexos[$i])){
+						 	echo '<a href="'.base_url().'assets/arquivos/'.$anexos[$i].' "><img src="'.base_url().'assets/download.png" ></a>'.nbs(3).$anexos[$i].'<br>';
+						 }
+						}
 
-			//listar adendos 
+						//listar adendos 
 
-			$qtdAdendos = (isset($adendos)) ? count($adendos) : '';
-			echo ($qtdAdendos > 0) ? '<br><strong>Adendos:</strong><br>' : '';
-			for ($i=0; $i <= $qtdAdendos ; $i++) { 
+						$qtdAdendos = (isset($adendos)) ? count($adendos) : '';
+						echo ($qtdAdendos > 0) ? '<br><strong>Adendos:</strong><br>' : '';
+						for ($i=0; $i <= $qtdAdendos ; $i++) { 
 
-				if(isset($adendos[$i])){
-			 	echo '<a href="'.base_url().'assets/arquivos/'.$adendos[$i].' "><img src="'.base_url().'assets/download.png" ></a>'.nbs(3).$adendos[$i].'<br>';
-			 }
-			}
+							if(isset($adendos[$i])){
+						 	echo '<a href="'.base_url().'assets/arquivos/'.$adendos[$i].' "><img src="'.base_url().'assets/download.png" ></a>'.nbs(3).$adendos[$i].'<br>';
+						 }
+						}
 
-			//lista resultados
+						//lista resultados
 
-			$qtdResultados = (isset($resultados))  ? count($resultados) : '';
-			echo ($qtdResultados > 0 ) ? '<br><strong>Resultados:</strong><br>': '';
+						$qtdResultados = (isset($resultados))  ? count($resultados) : '';
+						echo ($qtdResultados > 0 ) ? '<br><strong>Resultados:</strong><br>': '';
 
-			for ($i=0; $i <= $qtdResultados ; $i++) { 
+						for ($i=0; $i <= $qtdResultados ; $i++) { 
 
-				if(isset($resultados[$i])){
-			 	echo '<a href="'.base_url().'assets/arquivos/'.$resultados[$i].' "><img src="'.base_url().'assets/download.png" ></a>'.nbs(3).$resultados[$i].'<br>';
-			 }
-			}
-			
-			echo '<hr>';
+							if(isset($resultados[$i])){
+						 	echo '<a href="'.base_url().'assets/arquivos/'.$resultados[$i].' "><img src="'.base_url().'assets/download.png" ></a>'.nbs(3).$resultados[$i].'<br>';
+						 }
+						}
+						
+						echo '<hr>';
 
 
-			}
-				
+			}//endforeach
+						
 
-			
-		 $fimBody = '	
+			echo $laco;
+		 	$fimBody = '	
 			</body>
 			</html>
 
@@ -386,5 +387,7 @@ class Home extends CI_Controller {
 				
 	}
 }
+
+
         
 
