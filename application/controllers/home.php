@@ -281,7 +281,7 @@ class Home extends CI_Controller {
 			';
 		echo $body;	
 			foreach ($query as  $value) {
-						$laco .= '
+						echo  '
 						    <br><hr>
 							<p><strong>Modalidade :</strong>'.$value->modalidade.'</p>
 							<p><strong>Data de Abertura :</strong>'.formatDataBrasil($value->data).'</p>
@@ -290,13 +290,13 @@ class Home extends CI_Controller {
 							<p><strong>Arquivos :</strong> </p>
 						
 									';
-							//echo $laco;
+							
 							//GET EDITAL
 							$this->db->where('processo_id', $value->id);
 							$queryEdital = $this->db->get('edital')->result();
 							foreach ($queryEdital as $edital) {
 								
-								$editais[] = $edital->edital;
+								echo '<a href="'.base_url().'assets/arquivos/'.$edital->edital.' "><img src="'.base_url().'assets/download.png" ></a>'.nbs(3).$edital->edital.'<br>';
 							}
 
 
@@ -306,7 +306,7 @@ class Home extends CI_Controller {
 							$queryAnexos = $this->db->get('anexos')->result();
 							foreach ($queryAnexos as $anexo) {
 								
-								$anexos[] = $anexo->anexo;
+								echo '<a href="'.base_url().'assets/arquivos/'.$anexo->anexo.' "><img src="'.base_url().'assets/download.png" ></a>'.nbs(3).$anexo->anexo.'<br>';
 							}
 
 							//GET ADENDOS
@@ -315,47 +315,19 @@ class Home extends CI_Controller {
 							$queryAdendo = $this->db->get('adendos')->result();
 							foreach ($queryAdendo as $adendo) {
 								
-								$adendos[] = $adendo->adendos;
+								echo '<a href="'.base_url().'assets/arquivos/'.$adendos->adendos.' "><img src="'.base_url().'assets/download.png" ></a>'.nbs(3).$adendos->adendos.'<br>';
 							}
 							//GET RESULTADOS
 							$this->db->where('processo_id', $value->id);
 							$queryResultado = $this->db->get('resultados')->result();
 							foreach ($queryResultado as $resultado) {
 								
-								$resultados[] = $resultado->resultado;
+								echo '<a href="'.base_url().'assets/arquivos/'.$resultados->resultado.' "><img src="'.base_url().'assets/download.png" ></a>'.nbs(3).$resultados->resultado.'<br>';
 							}
 
-							//listar os editais
-						$qtdEdital = (isset($editais)) ? count($editais) : '';
-						echo ($qtdEdital > 0 ) ? '<strong>Editais:</strong><br>' : '';
-						for ($i=0; $i <= $qtdEdital ; $i++) { 
+					
 
-							if(isset($editais[$i])){
-						 	echo '<a href="'.base_url().'assets/arquivos/'.$editais[$i].' "><img src="'.base_url().'assets/download.png" ></a>'.nbs(3).$editais[$i].'<br>';
-						 }
-						}
-
-						//listar anexos
-
-						$qtdAnexos = (isset($anexos)) ? count($anexos) : '';
-						echo ($qtdAnexos >0 )?'<br><strong>Anexos:</strong><br>':'';
-						for ($i=0; $i <= $qtdAnexos ; $i++) { 
-
-							if(isset($anexos[$i])){
-						 	echo '<a href="'.base_url().'assets/arquivos/'.$anexos[$i].' "><img src="'.base_url().'assets/download.png" ></a>'.nbs(3).$anexos[$i].'<br>';
-						 }
-						}
-
-						//listar adendos 
-
-						$qtdAdendos = (isset($adendos)) ? count($adendos) : '';
-						echo ($qtdAdendos > 0) ? '<br><strong>Adendos:</strong><br>' : '';
-						for ($i=0; $i <= $qtdAdendos ; $i++) { 
-
-							if(isset($adendos[$i])){
-						 	echo '<a href="'.base_url().'assets/arquivos/'.$adendos[$i].' "><img src="'.base_url().'assets/download.png" ></a>'.nbs(3).$adendos[$i].'<br>';
-						 }
-						}
+						
 
 						//lista resultados
 
@@ -372,18 +344,10 @@ class Home extends CI_Controller {
 						echo '<hr>';
 
 
-			}//endforeach
+			}
 						
 
-			echo $laco;
-		 	$fimBody = '	
-			</body>
-			</html>
-
-
-
-			';
-
+			
 				
 	}
 }
